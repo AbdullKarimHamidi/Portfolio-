@@ -1,0 +1,52 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Moon+Dance&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Moon+Dance&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+@theme {
+   --font-bodyFont: "Poppins", sans-serif;
+   --font-titleFont: "Montserrat", sans-serif;
+   --font-resverfont: "Dancing Script", cursive;
+   --color-bodyColor: #212428;
+   --color-lighttext: #c4cfde;
+   --color-boxbg: linear-gradient(145deg, #1e2024, #23272b);
+   --color-designcolor: #ff014f;
+   --shadow-myshadow: 10px 10px 19px #1c1e22, -10px 19px #262a2e;
+   --shadow-hamidi: -8px 7px 19px -5px rgba(171, 84, 84, 0.8);
+}
+
+
+.swiper-pagination-bullet {
+  background-color: wheat !important;
+  width: 12px !important;
+  height: 12px !important;
+}
+.swiper-pagination-bullet-active {
+  background-color:#ff014f  !important;
+  width: 12px !important;
+  height: 12px !important;
+}
+html, body {
+  overflow-x: hidden;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Edge */
+}
+
+.scrollbar-hidden {
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+.resume{
+@apply text-xl w-full h-20  flex justify-center bg-black/25  text-gray-300 hover:bg-black/40 cursor-pointer duration-300 items-center  
+}
+.active{
+   color: white;
+}
+@import "tailwindcss"
+
+
