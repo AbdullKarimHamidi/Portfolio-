@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView, useScroll, useSpring } from "framer-motion";
 import {
-  ArrowDownRight, ArrowRight, ArrowUpRight, AtSign, BrainCircuit, Check,
-  ChevronDown, Code2, Database, Download, Github, Linkedin, Mail, MapPin,
-  Menu, MoveUpRight, Play, ScanFace, Sparkles, Terminal, X, Zap
+  ArrowDownRight, ArrowUpRight, BrainCircuit, Check,
+  Code2, Database, Download, Github, Linkedin, MapPin,
+  Menu, ScanFace, Sparkles, Terminal, X
 } from "lucide-react";
 import profileImage from "./assets/h2.png";
 import basketballImage from "./assets/bask.png";
