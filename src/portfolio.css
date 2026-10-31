@@ -306,3 +306,39 @@ html[dir="rtl"] body{direction:rtl}
 html[dir="rtl"] .reference-hero .hero-copy,html[dir="rtl"] .reference-section-lead,html[dir="rtl"] .reference-about,html[dir="rtl"] .reference-experience,html[dir="rtl"] .reference-skills,html[dir="rtl"] .section-heading,html[dir="rtl"] .project-copy,html[dir="rtl"] .timeline-role,html[dir="rtl"] .timeline-row ul{text-align:right}
 html[dir="rtl"] .reference-header,html[dir="rtl"] .hero-actions,html[dir="rtl"] .project-meta{direction:rtl}
 @media(max-width:700px){.header-tools{display:flex!important;position:absolute;right:62px;top:15px;gap:6px}.theme-pill,.language-pill{font-size:10px;padding:6px 8px}.download-pill{display:none!important}html[dir="rtl"] .header-tools{right:auto;left:62px}}
+
+
+/* Refined language and theme controls */
+.header-tools{display:flex;align-items:center;gap:9px}
+.language-switch{display:inline-flex;align-items:center;gap:3px;padding:4px;border:1px solid #38516d;border-radius:15px;background:linear-gradient(145deg,#14263b,#0a1523);box-shadow:inset 0 1px 0 #ffffff12,0 5px 16px #0003}
+.language-switch button{min-width:39px;height:31px;padding:0 10px;border:0;border-radius:10px;background:transparent;color:#a9bbce;font:600 11px/1 inherit;cursor:pointer;transition:background .22s ease,color .22s ease,box-shadow .22s ease,transform .22s ease}
+.language-switch button:hover{color:#fff;background:#ffffff0c}
+.language-switch button.selected{color:#061321;background:linear-gradient(135deg,#b8e7ff,#55baff);box-shadow:0 3px 12px #16a8ff44,inset 0 1px 0 #ffffffb0}
+.theme-pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 13px;border:1px solid #38516d;border-radius:13px;background:linear-gradient(145deg,#14263b,#0a1523);color:#eaf5ff;font:600 11px/1 inherit;box-shadow:inset 0 1px 0 #ffffff12,0 5px 16px #0003;transition:transform .2s ease,border-color .2s ease,background .2s ease;cursor:pointer}
+.theme-pill:hover{transform:translateY(-2px);border-color:#4cbcff;background:linear-gradient(145deg,#1b3550,#102137)}
+.theme-icon{display:grid;place-items:center;width:22px;height:22px;border-radius:8px;background:#ffffff12;color:#8bd4ff;font-size:16px}
+:root[data-theme="light"] .language-switch{background:linear-gradient(145deg,#fff,#edf4fb);border-color:#cbd9e8;box-shadow:0 5px 16px #1b426012}
+:root[data-theme="light"] .language-switch button{color:#61748b}
+:root[data-theme="light"] .language-switch button:hover{background:#eaf2fa;color:#1b3048}
+:root[data-theme="light"] .language-switch button.selected{color:#fff;background:linear-gradient(135deg,#167fc2,#0758a8);box-shadow:0 3px 12px #167fc233}
+:root[data-theme="light"] .theme-pill{background:linear-gradient(145deg,#fff,#edf4fb);border-color:#cbd9e8;color:#20344b;box-shadow:0 5px 16px #1b426012}
+:root[data-theme="light"] .theme-icon{background:#e7f1fb;color:#167fc2}
+html[dir="rtl"] body,html[dir="rtl"] button,html[dir="rtl"] input,html[dir="rtl"] select,html[dir="rtl"] textarea{font-family:"YekanBakh","Yekan Bakh",Tahoma,sans-serif}
+html[dir="rtl"] .reference-shell .hero-copy h1,html[dir="rtl"] .reference-shell .hero-copy h2,html[dir="rtl"] .reference-shell .reference-section-lead h2,html[dir="rtl"] .reference-shell .section-heading h2,html[dir="rtl"] .reference-shell .reference-contact h2{font-family:"YekanBakh","Yekan Bakh",Tahoma,sans-serif;letter-spacing:0;line-height:1.45}
+html[dir="rtl"] .reference-shell .hero-copy>p,html[dir="rtl"] .reference-shell .reference-section-lead p,html[dir="rtl"] .reference-shell .project-copy,html[dir="rtl"] .reference-shell .reference-about p,html[dir="rtl"] .reference-shell .timeline-row,html[dir="rtl"] .reference-shell .contact-card{line-height:1.9}
+html[dir="rtl"] .reference-shell .nav a,html[dir="rtl"] .reference-shell .btn-primary,html[dir="rtl"] .reference-shell .btn-secondary,html[dir="rtl"] .reference-shell .outline-link,html[dir="rtl"] .reference-shell .filters button,html[dir="rtl"] .reference-shell .download-pill{font-family:"YekanBakh","Yekan Bakh",Tahoma,sans-serif}
+html[dir="rtl"] .header-tools{direction:ltr}
+html[dir="rtl"] .language-switch{direction:ltr}
+html[dir="rtl"] .reference-header .nav{direction:rtl}
+html[dir="rtl"] .reference-shell .hero-actions{flex-wrap:wrap}
+html[dir="rtl"] .reference-shell .project-meta,html[dir="rtl"] .reference-shell .project-tags{direction:rtl}
+html[dir="rtl"] .reference-shell .timeline-row ul{padding-right:20px;padding-left:0}
+@media(max-width:700px){
+ .header-tools{display:flex!important;position:absolute;right:58px;top:11px;gap:5px}
+ .language-switch{gap:1px;padding:3px;border-radius:12px}
+ .language-switch button{min-width:30px;height:27px;padding:0 6px;font-size:10px}
+ .theme-pill{min-height:33px;padding:0 8px;gap:5px;font-size:10px;border-radius:11px}
+ .theme-icon{width:18px;height:18px;font-size:13px}
+ .download-pill{display:none!important}
+ html[dir="rtl"] .header-tools{right:auto;left:58px}
+}
