@@ -55,6 +55,13 @@ const projects = [
     stack: ["Next.js", "TypeScript", "Node.js", "MongoDB", "AI APIs"],
     image: null
   }
+  {
+    number: "07", title: "Real-Time Face Anonymizer",
+    type: "Computer Vision · Privacy",
+    description: "A privacy-focused vision tool that detects faces in live video and applies anonymization to protect identities in recorded or streamed footage.",
+    stack: ["Python", "MediaPipe", "OpenCV", "Image processing"],
+    image: anonymizerImage
+  },
 ];
 
 const skillGroups = [
@@ -115,7 +122,7 @@ function App() {
       <main id="top">
         <section className="hero section-wrap" id="about">
           <div className="hero-copy">
-            <div className="availability"><span className="availability-dot"/> OPEN TO OPPORTUNITIES <span className="availability-line"/></div>
+            <div className="availability"><span className="availability-dot"/> SOFTWARE ENGINEERING · COMPUTER VISION <span className="availability-line"/></div>
             <p className="hero-kicker">FULL-STACK DEVELOPER <span>×</span> COMPUTER VISION ENGINEER</p>
             <h1>I build software<br/>that <em>solves</em> things.</h1>
             <p className="hero-description">I'm Karim — a software engineer working across modern web applications and computer vision. I turn complex requirements into practical products, from responsive interfaces and APIs to real-time systems that understand visual data.</p>
@@ -142,7 +149,7 @@ function App() {
           <div className="section-wrap intro-grid">
             <p className="intro-label">A LITTLE ABOUT MY WORK</p>
             <p className="intro-text">I enjoy working where <strong>software engineering</strong> meets <strong>applied AI</strong> — building useful products, thoughtful interfaces and systems that work beyond a demo.</p>
-            <div className="intro-facts"><div><strong>4+</strong><span>Years of experience</span></div><div><strong>03</strong><span>Professional roles</span></div><div><strong>06</strong><span>Featured projects</span></div></div>
+            <div className="intro-facts"><div><strong>4+</strong><span>Years of experience</span></div><div><strong>03</strong><span>Professional roles</span></div><div><strong>07</strong><span>Featured projects</span></div></div>
           </div>
         </section>
 
@@ -163,7 +170,7 @@ function App() {
                 <div className="project-visual">
                   <span className="project-number">{project.number}</span>
                   {project.image ? <img src={project.image} alt={`${project.title} project preview`} loading="lazy"/> : <div className="project-placeholder"><BrainCircuit size={42}/><span>APPLIED ENGINEERING</span></div>}
-                  <a href="https://github.com/AbdullKarimHamidi" target="_blank" rel="noreferrer" className="project-link" aria-label={`View ${project.title} on GitHub`}><ArrowUpRight size={19}/></a>
+                  <a href="https://github.com/AbdullKarimHamidi" target="_blank" rel="noreferrer" className="project-link" aria-label={`Browse Karim’s GitHub profile for ${project.title} source code`}><ArrowUpRight size={19}/></a>
                 </div>
                 <div className="project-content">
                   <div className="project-type">{project.type}</div>
@@ -173,6 +180,7 @@ function App() {
                 </div>
               </article>)}
             </div>
+            <div className="additional-work"><span>ALSO BUILT</span><p>Computer vision utilities for hand tracking, pose estimation and KNN-based attendance · MERN e-commerce with catalog, cart and checkout · Movie streaming catalogue · Doctor appointment and real estate platforms.</p></div>
             <a className="all-work-link" href="https://github.com/AbdullKarimHamidi" target="_blank" rel="noreferrer">More code and experiments on GitHub <ArrowUpRight size={17}/></a>
           </div>
         </section>
@@ -200,7 +208,7 @@ function App() {
 
         <section className="contact-section" id="contact">
           <div className="section-wrap contact-inner">
-            <div><span className="eyebrow">HAVE A PROJECT IN MIND? / 05</span><h2>Let's make<br/><em>something useful.</em></h2><p>I'm open to software engineering opportunities, collaborations and interesting technical challenges.</p></div>
+            <div><span className="eyebrow">HAVE A PROJECT IN MIND? / 05</span><h2>Let's make<br/><em>something useful.</em></h2><p>For project enquiries, engineering conversations and professional contact, feel free to reach out.</p></div>
             <div className="contact-actions"><a className="contact-email" href="mailto:karimjanhamidi10@gmail.com">karimjanhamidi10@gmail.com <ArrowUpRight size={19}/></a><div className="social-links"><a href="https://www.linkedin.com/in/karim-hamidi-647883211/" target="_blank" rel="noreferrer"><Linkedin size={17}/> LinkedIn</a><a href="https://github.com/AbdullKarimHamidi" target="_blank" rel="noreferrer"><Github size={17}/> GitHub</a></div><a className="button button-primary" href="/Karim_Hamidi_ATS_Resume.pdf" download>Get my resume <Download size={16}/></a></div>
           </div>
         </section>
