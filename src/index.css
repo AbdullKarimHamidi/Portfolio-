@@ -1,29 +1,6 @@
 @import "tailwindcss";
-
-:root {
-  color-scheme: dark;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 90px;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-button, a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-::selection {
-  background: #c3f36b;
-  color: #172012;
-}
+:root{font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+html{scroll-behavior:smooth}
+body{margin:0;min-width:320px;min-height:100vh}
+button,a{-webkit-tap-highlight-color:transparent}
+::selection{background:#3159e8;color:#fff}
