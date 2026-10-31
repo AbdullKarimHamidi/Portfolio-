@@ -282,3 +282,27 @@ body{background:#050b13}
   .reference-about { grid-row: span 2; }
   .reference-skills { grid-column: 2; }
 }
+
+:root[data-theme="light"]{color-scheme:light}
+:root[data-theme="light"] body,:root[data-theme="light"] .site-shell{background:#f3f6fa!important;color:#172337!important}
+:root[data-theme="light"] .reference-header{background:#fffffff2!important;border-color:#d7e0eb!important}
+:root[data-theme="light"] .reference-header .brand,:root[data-theme="light"] .reference-header .nav a{color:#172337!important}
+:root[data-theme="light"] .reference-hero{background:radial-gradient(ellipse at 70% 50%,#d8edff,transparent 58%),linear-gradient(110deg,#f8fbff,#eaf3fc)!important}
+:root[data-theme="light"] .reference-hero .hero-copy h1,:root[data-theme="light"] .reference-hero .hero-copy h2,:root[data-theme="light"] .reference-section-lead h2,:root[data-theme="light"] .reference-about h2,:root[data-theme="light"] .reference-panel-heading h2,:root[data-theme="light"] .section-heading h2{color:#172337!important}
+:root[data-theme="light"] .reference-hero .hero-copy>p,:root[data-theme="light"] .reference-section-lead p,:root[data-theme="light"] .reference-about p,:root[data-theme="light"] .section-note p{color:#52657c!important}
+:root[data-theme="light"] .tech-strip{background:#ffffffdf!important;border-color:#d6e1ed!important}
+:root[data-theme="light"] .tech-item{color:#263b54!important}
+:root[data-theme="light"] .reference-projects,:root[data-theme="light"] .reference-lower,:root[data-theme="light"] .reference-shell .all-projects,:root[data-theme="light"] .reference-shell .experience-details{background:#f3f6fa!important;border-color:#dce4ee!important}
+:root[data-theme="light"] .featured-projects .project-card,:root[data-theme="light"] .project-card,:root[data-theme="light"] .reference-experience,:root[data-theme="light"] .reference-skills{background:#fff!important;border-color:#d7e1ed!important}
+:root[data-theme="light"] .project-copy h3,:root[data-theme="light"] .featured-projects .project-copy h3{color:#172337!important}
+:root[data-theme="light"] .project-copy p{color:#52657c!important}
+:root[data-theme="light"] .reference-contact{background:#eaf2fa!important}
+:root[data-theme="light"] .reference-contact h2{color:#172337!important}
+:root[data-theme="light"] .reference-contact .contact-card,:root[data-theme="light"] .project-modal{background:#fff!important;color:#172337!important}
+:root[data-theme="light"] .reference-footer{background:#fff!important;border-color:#dbe4ee!important}
+.theme-pill,.language-pill{cursor:pointer;border:1px solid #52708f;background:#102238;color:#eaf5ff;border-radius:22px;padding:8px 11px;font:inherit}
+:root[data-theme="light"] .theme-pill,:root[data-theme="light"] .language-pill{background:#fff;color:#20344b;border-color:#cbd8e6}
+html[dir="rtl"] body{direction:rtl}
+html[dir="rtl"] .reference-hero .hero-copy,html[dir="rtl"] .reference-section-lead,html[dir="rtl"] .reference-about,html[dir="rtl"] .reference-experience,html[dir="rtl"] .reference-skills,html[dir="rtl"] .section-heading,html[dir="rtl"] .project-copy,html[dir="rtl"] .timeline-role,html[dir="rtl"] .timeline-row ul{text-align:right}
+html[dir="rtl"] .reference-header,html[dir="rtl"] .hero-actions,html[dir="rtl"] .project-meta{direction:rtl}
+@media(max-width:700px){.header-tools{display:flex!important;position:absolute;right:62px;top:15px;gap:6px}.theme-pill,.language-pill{font-size:10px;padding:6px 8px}.download-pill{display:none!important}html[dir="rtl"] .header-tools{right:auto;left:62px}}
