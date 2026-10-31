@@ -16,3 +16,39 @@
 @media(max-width:1050px){.hero-copy h1{font-size:90px}.hero-inner{grid-template-columns:1fr .82fr;gap:18px}.hero-visual{height:440px}.portrait{height:390px}.projects-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.skill-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.skill-card:nth-child(2){border-right:0}.skill-card:nth-child(-n+2){border-bottom:1px solid #2a3644}.timeline-row{grid-template-columns:.55fr 1fr 1.2fr 20px;gap:17px}.about-inner{gap:45px}}
 @media(max-width:700px){.container{width:calc(100% - 40px)}.header{height:70px;padding:0 20px}.mobile-menu{display:block}.nav{display:none;position:absolute;top:70px;left:0;right:0;background:#0b111a;border-bottom:1px solid #2a3543;padding:14px 20px 20px;flex-direction:column;align-items:stretch;gap:0}.nav.nav-open{display:flex}.nav>a{padding:14px 0;border-bottom:1px solid #ffffff12}.nav .nav-cta{justify-content:center;margin-top:12px}.hero{min-height:0}.hero-inner{grid-template-columns:1fr;padding:52px 0 85px;gap:35px}.eyebrow{font-size:7px;flex-wrap:wrap}.hero-number{margin-top:33px}.hero-copy h1{font-size:clamp(66px,17vw,92px);letter-spacing:-5px}.hero-copy>p{font-size:12px;margin:22px 0}.hero-facts{font-size:7px;gap:10px;flex-wrap:wrap;margin-top:27px}.hero-visual{height:350px;margin:0 5px}.portrait{height:315px;width:74%}.portrait-ring{width:380px;height:380px}.ring-b{width:430px;height:430px}.portrait-badge{width:76px;height:76px;left:0;bottom:8px}.portrait-badge b{font-size:23px}.portrait-badge small{font-size:4px}.portrait-note{right:-5px;bottom:48px;padding:10px}.portrait-index{right:-12px;font-size:6px}.hero-bottom{bottom:19px;font-size:7px}.intro{padding:34px 0}.intro-inner{grid-template-columns:1fr;gap:17px}.intro-inner>div:nth-child(2) p{font-size:22px}.stats{justify-content:flex-start;gap:25px;margin-top:8px}.stats b{font-size:23px}.stats small{font-size:6px}.section-space{padding:80px 0}.section-heading{display:block;margin-bottom:32px}.section-heading h2,.about h2{font-size:clamp(43px,11vw,59px);letter-spacing:-2.6px;margin-top:17px}.section-note{margin-top:17px}.section-note p{font-size:11px}.filters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:13px}.filters button{white-space:nowrap;font-size:9px;padding:9px 10px}.projects-grid{grid-template-columns:1fr;gap:14px}.project-image{height:210px}.project-copy{padding:16px}.project-copy h3{font-size:19px}.project-copy p{font-size:10px}.archive-bar{align-items:flex-start;flex-direction:column}.archive-bar>span{font-size:7px}.skill-grid{grid-template-columns:1fr}.skill-card{border-right:0!important;border-bottom:1px solid #2a3644;min-height:0;padding:21px}.skill-card:last-child{border-bottom:0}.skill-card h3{margin:22px 0 13px}.manifesto{padding:78px 0}.manifesto-inner{grid-template-columns:1fr;gap:30px}.manifesto h2{font-size:clamp(56px,14vw,74px);letter-spacing:-3.5px}.manifesto-note{padding-left:18px}.manifesto-note p{font-size:14px}.timeline-row{grid-template-columns:1fr 20px;gap:11px;padding:24px 0}.timeline-date{grid-column:1/-1;flex-direction:row;align-items:center;gap:13px}.timeline-role{grid-column:1}.timeline-row ul{grid-column:1/-1;font-size:10px}.timeline-arrow{grid-column:2;grid-row:2}.timeline-role h3{font-size:18px}.education{grid-template-columns:1fr;gap:22px;padding:21px}.about-inner{grid-template-columns:1fr;gap:25px}.about-side{padding:0}.about-inner>div:first-child>p{font-size:11px}.about-side p{font-size:9px}.about-side small{font-size:8px}.contact{padding:78px 0}.contact-inner{grid-template-columns:1fr;gap:28px}.contact h2{font-size:70px;letter-spacing:-4px;margin:20px 0}.contact-card{padding:22px}.contact-card>a:not(.cv-link){font-size:11px}.socials{gap:17px}.footer-inner{padding:23px 0;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:16px}.footer-inner>.brand{grid-column:1/-1}.footer-inner>span:nth-child(2){grid-column:1/-1;order:3}.footer-inner>span:nth-child(3){justify-self:end}.project-modal{grid-template-columns:1fr;max-height:92vh}.modal-art img{min-height:210px;max-height:230px}.modal-content{padding:25px 20px}.modal-content h2{font-size:28px}.modal-lead{font-size:12px}.modal-detail{font-size:10px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+
+/* Unified artwork-matched visual system */
+:root{
+  color-scheme:dark;
+  --bg:#090e16;
+  --panel:#101a28;
+  --line:#40516a;
+  --muted:#91a2b8;
+  --text:#f4f7fb;
+  --blue:#8faeff;
+  --mint:#70e2c0;
+  background:#090e16;
+  color:#f4f7fb;
+}
+html,body,#root{min-height:100%;background:#090e16;color:#f4f7fb}
+body{background:linear-gradient(135deg,#1b293c 0%,#101a28 42%,#090e16 100%) fixed}
+.site-shell{background:linear-gradient(135deg,#1b293c 0%,#101a28 38%,#090e16 100%)}
+.header{background:#090e16dc;border-bottom-color:#40516a55}
+.hero{background:radial-gradient(ellipse at 73% 42%,#2a405a 0%,#101a28 42%,#090e16 78%)}
+.intro,.capabilities,.about{background:linear-gradient(135deg,#1b293c 0%,#101a28 70%,#101a28 100%);border-color:#40516a66}
+.work,.experience{background:linear-gradient(135deg,#101a28 0%,#090e16 75%)}
+.manifesto{background:radial-gradient(ellipse at 78% 25%,#70e2c01b,transparent 42%),linear-gradient(135deg,#1b293c 0%,#101a28 58%,#090e16 100%)}
+.contact{background:radial-gradient(ellipse at 78% 20%,#2a405a66,transparent 42%),linear-gradient(135deg,#101a28 0%,#090e16 78%)}
+.footer{background:#090e16}
+.project-card,.contact-card,.education,.portrait-note,.portrait-badge,.project-modal{background:#101a28;border-color:#40516a}
+.project-image{background:#101a28}
+.project-copy h3,.hero-copy h1,.section-heading h2,.about h2,.contact h2,.manifesto h2{color:#f4f7fb}
+.hero-copy>p,.section-note p,.project-copy p,.timeline-row ul,.about-inner>div:first-child>p,.contact-inner>div:first-child>p{color:#91a2b8}
+.project-tags span,.modal-tags span{border-color:#40516a;color:#b7c5d7}
+.filters button{border-color:#40516a;color:#91a2b8}
+.filters button:hover,.filters button.active{border-color:#70e2c0;background:#70e2c014;color:#f4f7fb}
+.skill-grid{border-color:#40516a}.skill-card{border-color:#40516a}.skill-card:hover{background:#1b293c}.skill-tags span{background:#1b293c;color:#b7c5d7}
+.timeline,.timeline-row{border-color:#40516a66}.education{background:#101a28}
+.modal-layer{background:#070d16e8}.project-modal{background:#101a28}
+@media(prefers-reduced-motion:reduce){.project-card,.project-image img{transition:none!important}}
