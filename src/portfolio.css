@@ -229,7 +229,7 @@ body{background:#050b13}
   .outline-link { font-size: 11px; padding: 8px 14px; }
   .featured-projects { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
   .featured-projects .project-card { border-radius: 13px; }
-  .featured-projects .project-image { height: 128px; }
+  .featured-projects .project-image { height: 112px; }
   .featured-projects .project-copy { padding: 10px 11px 11px; }
   .featured-projects .project-copy h3 { font-size: 13px; line-height: 1.22; min-height: 32px; margin-bottom: 7px; }
   .featured-projects .project-tags { gap: 5px; max-height: 20px; }
@@ -265,7 +265,7 @@ body{background:#050b13}
   .reference-hero .hero-visual { height: 380px; }
   .reference-hero .portrait { height: 405px; width: min(490px, 100%); }
   .reference-projects { padding-top: 19px; padding-bottom: 17px; }
-  .featured-projects .project-image { height: 138px; }
+  .featured-projects .project-image { height: 120px; }
   .reference-lower-grid { grid-template-columns: 1.08fr 1fr 1.12fr; }
 }
 
