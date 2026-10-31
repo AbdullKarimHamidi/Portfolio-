@@ -1,38 +1,256 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView, useScroll, useSpring } from "framer-motion";
-import { ArrowDown, ArrowDownRight, ArrowUp, ArrowUpRight, Code2, Database, Download, Github, Linkedin, MapPin, Menu, ScanFace, Layers3, Sparkles, X } from "lucide-react";
-import portrait from "./assets/h2.png";
+import {
+  ArrowDownRight, ArrowUpRight, BrainCircuit, Check,
+  Code2, Database, Download, Github, Linkedin, MapPin,
+  Menu, ScanFace, Sparkles, Terminal, X
+} from "lucide-react";
+import profileImage from "./assets/h2.png";
+import basketballImage from "./assets/bask.png";
+import intrusionImage from "./assets/intrusion.png";
+import lmsImage from "./assets/lms.png";
+import attendanceImage from "./assets/RealTime.png";
+import anonymizerImage from "./assets/Face_an.png";
 import "./portfolio.css";
 
-const projects=[{"id":"orchestrator","n":"AI Orchestration Platform","type":"AI SYSTEMS","group":"AI Systems","status":"Private product","featured":true,"desc":"A self-hosted platform for building, versioning and running AI agents with a Next.js frontend, FastAPI control plane, durable worker and MongoDB.","detail":"Agent lifecycle, model providers, tools and MCP, knowledge retrieval, workflows, evaluations, memory, live run events, team workspaces and audit trails.","stack":["Next.js","FastAPI","Python","MongoDB","Docker","SSE","MCP"],"repo":"https://github.com/AbdullKarimHamidi/AI-Orchestrator","visual":"workflow"},{"id":"devforge","n":"DevForge AI","type":"AI / DEVELOPER EDUCATION","group":"AI Systems","status":"Private product","featured":true,"desc":"An adaptive software-engineering mentor that turns learning goals into daily practice and real project work.","detail":"Adaptive roadmaps, daily tasks, spaced repetition, code feedback and task-scoped AI mentoring. Imports ZIP or GitHub codebases, analyzes structure and maps project-specific learning paths.","stack":["Next.js 16","React 19","MongoDB","Mongoose","Motion","AI providers"],"repo":"https://github.com/AbdullKarimHamidi/-DevForge-AI","visual":"devforge"},{"id":"engineering-arena","n":"Engineering Arena","type":"ENGINEERING PRACTICE / AI MENTOR","group":"AI Systems","status":"Foundation / prototype","featured":true,"desc":"A personal engineering practice workspace for full-stack, backend and computer-vision challenges.","detail":"The current foundation includes a practice dashboard, curated tasks, Monaco coding workspace, hints, mentor feedback, project ZIP inventory scanning and local practice history. The repository documents that it is a single-user starter and does not execute arbitrary code.","stack":["Next.js","TypeScript","MongoDB / Mongoose","Monaco Editor","Claude API"],"repo":"https://github.com/AbdullKarimHamidi/AI-mentor","visual":"arena"},{"id":"face-attendance","n":"Real-Time Face Attendance","type":"COMPUTER VISION / FULL-STACK","group":"Computer Vision","status":"Project repository","featured":true,"desc":"A face-recognition attendance platform designed for organizations, offices and multi-branch environments.","detail":"Connects real-time face recognition to attendance workflows and a management interface. The repository describes automatic attendance marking and multi-level management for multiple users and branches.","stack":["Python","Next.js","OpenCV","Face recognition","MongoDB"],"repo":"https://github.com/AbdullKarimHamidi/Real-Time-Face-Attendance-system-using-Python-and-Next.js","visual":"attendance"},{"id":"intrusion","n":"AI Intrusion Detection","type":"COMPUTER VISION / SECURITY","group":"Computer Vision","status":"Open-source project","featured":true,"desc":"A video-monitoring system that detects people entering user-defined restricted zones.","detail":"Uses YOLOv8n and OpenCV to detect people, track movement through drawn zones, trigger warnings when a boundary is crossed and save alert screenshots.","stack":["Python","YOLOv8n","OpenCV"],"repo":"https://github.com/AbdullKarimHamidi/Intrusion-Detection","visual":"intrusion"},{"id":"basketball","n":"Real-Time Basketball Analysis","type":"COMPUTER VISION / SPORTS","group":"Computer Vision","status":"Open-source project","featured":true,"desc":"An AI video-analysis pipeline for detecting and tracking basketball players and the ball.","detail":"Processes match footage, detects players and the basketball, tracks movement and visualizes object trajectories. Includes custom drawing utilities and video input/output workflows.","stack":["Python","OpenCV","YOLOv8","NumPy"],"repo":"https://github.com/AbdullKarimHamidi/Real-Time-Basketball-Analysis-with-Computer-Vision","visual":"basketball"},{"id":"liveness","n":"Face Liveness Detection","type":"COMPUTER VISION / ANTI-SPOOFING","group":"Computer Vision","status":"Open-source project","featured":true,"desc":"A real-time face-liveness model designed to distinguish live faces from spoofed presentations.","detail":"A YOLOv8-based deep-learning project for detecting real and spoofed faces in real time, with a real-face dataset and computer-vision model workflow.","stack":["Python","YOLOv8","PyTorch","OpenCV"],"repo":"https://github.com/AbdullKarimHamidi/Real-Time-Face-Liveness-Detection-using-YOLOv8","visual":"liveness"},{"id":"anonymizer","n":"Face Anonymizer / Privacy Filter","type":"COMPUTER VISION / PRIVACY","group":"Computer Vision","status":"Open-source project","featured":true,"desc":"A real-time face-detection utility that applies privacy-preserving filters to video.","detail":"Uses MediaPipe for face detection and OpenCV for image processing to blur or mask faces in live video, supporting privacy-aware recording and monitoring workflows.","stack":["Python","MediaPipe","OpenCV"],"repo":"https://github.com/AbdullKarimHamidi/Face-Anonymizer-Privacy-Filter","visual":"anonymizer"},{"id":"lms","n":"Learning Management System","type":"FULL-STACK / EDUCATION","group":"Full-stack","status":"Project repository","featured":true,"desc":"An online learning platform concept for course delivery, class management and student progress.","detail":"Teacher and student workflows: teachers can assign classes and deliver content, while students access lessons, submit work and review progress in one place.","stack":["Next.js","TypeScript","MongoDB","Node.js","Tailwind CSS"],"repo":"https://github.com/AbdullKarimHamidi/Learning-Management-System","visual":"lms"},{"id":"ai-interview","n":"AI Interview Platform","type":"AI APPLICATION / WEB","group":"Full-stack","status":"Early build","featured":false,"desc":"A Next.js-based interview practice application exploring AI-assisted interview preparation.","detail":"The repository establishes a Next.js application and authentication UI foundation. It is included as an early build rather than presented as a fully shipped product.","stack":["Next.js","TypeScript","React"],"repo":"https://github.com/AbdullKarimHamidi/AI-interview-platform","visual":"interview"},{"id":"hand-tracking","n":"Real-Time Hand Tracking","type":"COMPUTER VISION / INTERACTION","group":"Experiments","status":"Computer-vision experiment","featured":false,"desc":"A webcam-based hand-tracking experiment that detects up to two hands and visualizes 21 landmarks.","detail":"Captures webcam frames with OpenCV, passes RGB frames to MediaPipe Hands, draws landmark connections and highlights the index fingertip.","stack":["Python","OpenCV","MediaPipe"],"repo":"https://github.com/AbdullKarimHamidi/real-time-hand-tracking","visual":"hand"},{"id":"pose","n":"Real-Time Pose Estimation","type":"COMPUTER VISION / BODY LANDMARKS","group":"Experiments","status":"Computer-vision experiment","featured":false,"desc":"A webcam application for detecting and tracking human body landmarks in real time.","detail":"Uses MediaPipe and OpenCV to estimate body pose, draw landmarks on the video stream and expose adjustable detection and tracking confidence.","stack":["Python","OpenCV","MediaPipe"],"repo":"https://github.com/AbdullKarimHamidi/Real-time-Pose-Estimation","visual":"pose"},{"id":"knn-attendance","n":"KNN Face Recognition Attendance","type":"COMPUTER VISION / ML","group":"Experiments","status":"Earlier implementation","featured":false,"desc":"An earlier face-recognition attendance implementation using a webcam and K-nearest neighbors.","detail":"Recognizes registered individuals from a live camera feed and records attendance in CSV with time-based restrictions to prevent duplicate entries.","stack":["Python","OpenCV","KNN","CSV"],"repo":"https://github.com/AbdullKarimHamidi/Real-Time-Face-Recognition-Attendance-System-OpenCV-KNN-","visual":"knn"},{"id":"real-estate","n":"Real Estate Agency","type":"WEB APPLICATION / PROPERTY","group":"Experiments","status":"Early build","featured":false,"desc":"A Next.js real-estate application repository exploring property-listing workflows.","detail":"The repository describes a real-estate agency app built with Next.js and includes an add-new-listing route. Shown as an early build, not as a completed marketplace.","stack":["Next.js","React"],"repo":"https://github.com/AbdullKarimHamidi/nextjs-Real-state-agency","visual":"realestate"},{"id":"ecommerce","n":"MERN E-commerce App","type":"WEB APPLICATION / COMMERCE","group":"Experiments","status":"Early build","featured":false,"desc":"A React storefront prototype organized around shopping, navigation and account screens.","detail":"The repository contains a Vite/React client with routing, page and component structure. Presented as an early e-commerce build rather than a production commerce platform.","stack":["React","Vite","Tailwind CSS","Axios","React Router"],"repo":"https://github.com/AbdullKarimHamidi/mern-stack-ecommerce-app","visual":"commerce"},{"id":"doctor","n":"Doctor Appointment System","type":"WEB APPLICATION / HEALTHCARE","group":"Experiments","status":"Early scaffold","featured":false,"desc":"An early repository for a doctor-appointment application with separate frontend and backend folders.","detail":"The repository currently exposes a basic frontend scaffold and a backend package. It is labelled accurately as an early scaffold rather than claiming completed booking features.","stack":["React","Vite"],"repo":"https://github.com/AbdullKarimHamidi/doctor-appointment-system","visual":"doctor"},{"id":"game","n":"Game Discovery Interface","type":"REACT / INTERACTIVE UI","group":"Experiments","status":"UI project","featured":false,"desc":"A React interface organized around game discovery, browsing cards and responsive navigation.","detail":"Contains a component-driven game browsing experience with a header, content area, game cards, sliders and mobile navigation.","stack":["React","Vite","Tailwind CSS"],"repo":"https://github.com/AbdullKarimHamidi/Reactjs_Game_project","visual":"game"},{"id":"crud","n":"Next.js CRUD App","type":"FULL-STACK / DATA MANAGEMENT","group":"Experiments","status":"Starter project","featured":false,"desc":"A Next.js CRUD application repository described as a MongoDB-backed data-management project.","detail":"The repository description identifies it as a Next.js CRUD application with MongoDB. Included in the experiments archive as a starter project.","stack":["Next.js","MongoDB"],"repo":"https://github.com/AbdullKarimHamidi/nextjs-crud-app","visual":"crud"}];
-const groups=["All work","AI Systems","Computer Vision","Full-stack","Experiments"];
-const email="karimjanhamidi10@gmail.com";
-const phone="+93 798 534 752";
-const github="https://github.com/AbdullKarimHamidi";
-const linkedin="https://www.linkedin.com/in/karim-hamidi-647883211/";
-const experience=[
-{period:"NOV 2024 — SEP 2025",role:"Computer Vision Developer",company:"Rahanet IT Company",place:"Herat, Afghanistan",points:["Developed computer-vision features with Python, OpenCV and YOLO for monitoring and analytics.","Built face-recognition and object-detection pipelines for people and vehicle tracking in live video.","Implemented automated people- and vehicle-counting reports, tuning processing for low-resource hardware.","Connected vision modules to backend services and dashboards for reviewing alerts, screenshots and reports."]},
-{period:"OCT 2023 — JUL 2024",role:"Web Developer",company:"Wassa Company",place:"Herat, Afghanistan",points:["Built responsive web interfaces with HTML, CSS, JavaScript and React.","Implemented backend functionality and integrated REST APIs.","Improved performance and accessibility through refactoring and reusable components."]},
-{period:"FEB 2022 — AUG 2023",role:"MERN Stack Web Developer",company:"Farsrout Company",place:"Herat, Afghanistan",points:["Developed full-stack applications with MongoDB, Express, React and Node.js.","Designed REST APIs and implemented JWT authentication and role-based access control.","Improved maintainability through refactoring, code reviews and reusable component patterns."]}
+const email = "karimjanhamidi10@gmail.com";
+const github = "https://github.com/AbdullKarimHamidi";
+const linkedin = "https://www.linkedin.com/in/karim-hamidi-647883211/";
+
+const projects = [
+  {
+    id: "01", category: "COMPUTER VISION / FULL-STACK", title: "Real-time face recognition attendance",
+    intro: "Turning a camera feed into a practical attendance workflow.",
+    detail: "A web-based attendance platform that connects a live recognition service to a management dashboard. The system uses InsightFace and OpenCV for face identification, with a Python API serving a Next.js interface and MongoDB-backed records.",
+    outcome: "Live face identification · Attendance records · Role-based management",
+    stack: ["Next.js", "TypeScript", "FastAPI", "InsightFace", "OpenCV", "MongoDB"],
+    image: attendanceImage, tone: "blue", featured: true
+  },
+  {
+    id: "02", category: "COMPUTER VISION / SECURITY", title: "Intrusion detection system",
+    intro: "Making restricted areas visible to an operator in real time.",
+    detail: "A video-monitoring workflow where restricted zones can be defined on a camera feed. Object detection and tracking identify entries and trigger alerts with saved screenshots for later review.",
+    outcome: "Restricted-zone monitoring · Detection and tracking · Alert snapshots",
+    stack: ["Python", "YOLO", "OpenCV", "NumPy"],
+    image: intrusionImage, tone: "orange"
+  },
+  {
+    id: "03", category: "WEB APPLICATION / EDUCATION", title: "Learning management system",
+    intro: "One learning product, with clear workflows for every role.",
+    detail: "A learning platform with dedicated experiences for administrators, instructors and students. It supports course creation, enrollment and progress workflows through a responsive interface and authenticated backend.",
+    outcome: "Role-based dashboards · Course management · Enrollment workflows",
+    stack: ["Next.js", "TypeScript", "MongoDB", "Node.js", "JWT"],
+    image: lmsImage, tone: "violet"
+  },
+  {
+    id: "04", category: "MACHINE LEARNING / ANTI-SPOOFING", title: "Face liveness detection",
+    intro: "Distinguishing a live face from photo- and screen-based attempts.",
+    detail: "A real-time liveness workflow built around a custom labeled dataset and a model training and evaluation process.",
+    outcome: "Liveness classification · Dataset preparation · Model evaluation",
+    stack: ["Python", "YOLOv8", "PyTorch", "OpenCV"],
+    image: null, tone: "mint"
+  },
+  {
+    id: "05", category: "COMPUTER VISION / SPORTS", title: "Basketball video analysis",
+    intro: "Finding movement and structure inside match footage.",
+    detail: "A video analysis pipeline that detects and tracks players and the ball, then visualizes movement trajectories through reusable annotations.",
+    outcome: "Player and ball detection · Object tracking · Trajectory visualization",
+    stack: ["Python", "YOLOv8", "OpenCV"],
+    image: basketballImage, tone: "orange"
+  },
+  {
+    id: "06", category: "AI APPLICATION / CAREER TOOLS", title: "AI interview platform",
+    intro: "A structured place to practise, review and improve interviews.",
+    detail: "An interview practice application with AI-generated questions, structured feedback, authentication and a personal interview history.",
+    outcome: "AI-generated questions · Feedback workflow · User history",
+    stack: ["Next.js", "TypeScript", "Node.js", "MongoDB", "AI APIs"],
+    image: null, tone: "blue"
+  },
+  {
+    id: "07", category: "COMPUTER VISION / PRIVACY", title: "Real-time face anonymizer",
+    intro: "Applying privacy protection directly to visual data.",
+    detail: "A computer vision utility that detects faces in video and applies anonymization to help protect identities in recorded or streamed footage.",
+    outcome: "Face detection · Real-time anonymization · Video processing",
+    stack: ["Python", "MediaPipe", "OpenCV"],
+    image: anonymizerImage, tone: "violet"
+  }
 ];
-const skills=[
-{name:"Frontend engineering",icon:Code2,items:["React","Next.js","TypeScript","JavaScript","Redux","Tailwind CSS","HTML","CSS"]},
-{name:"Backend & data",icon:Database,items:["Node.js","Express","FastAPI","REST APIs","WebSockets","JWT","MongoDB","Mongoose","MySQL"]},
-{name:"Computer vision & ML",icon:ScanFace,items:["Python","OpenCV","YOLOv8","InsightFace","MediaPipe","PyTorch","scikit-learn","CNNs","KNN"]},
-{name:"Tools & delivery",icon:Layers3,items:["Git","GitHub","Docker","Linux","Postman","Vercel","Agile / Scrum"]}
+
+const experience = [
+  {
+    period: "NOV 2024 — SEP 2025", role: "Computer Vision Developer", company: "Rahanet IT Company", location: "Herat, Afghanistan",
+    bullets: [
+      "Developed computer vision features with Python, OpenCV and YOLO for surveillance, monitoring and analytics.",
+      "Built face-recognition and object-detection pipelines for people and vehicle tracking in live video.",
+      "Implemented automated people- and vehicle-counting reports, with processing tuned for low-resource hardware.",
+      "Connected vision modules to backend services and dashboards for reviewing alerts, screenshots and reports."
+    ]
+  },
+  {
+    period: "OCT 2023 — JUL 2024", role: "Web Developer", company: "Wassa Company", location: "Herat, Afghanistan",
+    bullets: [
+      "Built responsive web interfaces using HTML, CSS, JavaScript and React.",
+      "Implemented backend functionality and integrated internal and third-party REST APIs.",
+      "Improved page performance and accessibility through refactoring and reusable components."
+    ]
+  },
+  {
+    period: "FEB 2022 — AUG 2023", role: "MERN Stack Web Developer", company: "Farsrout Company", location: "Herat, Afghanistan",
+    bullets: [
+      "Developed full-stack applications with MongoDB, Express, React and Node.js.",
+      "Designed REST APIs and implemented JWT authentication and role-based access control.",
+      "Improved maintainability through refactoring, code reviews and reusable component patterns."
+    ]
+  }
 ];
-function Reveal({children,className="",delay=0}){const ref=useRef(null);const visible=useInView(ref,{once:true,amount:.16});return <motion.div ref={ref} className={className} initial={{opacity:0,y:30,filter:"blur(6px)"}} animate={visible?{opacity:1,y:0,filter:"blur(0px)"}:{opacity:0,y:30,filter:"blur(6px)"}} transition={{duration:.75,delay,ease:[.22,1,.36,1]}}>{children}</motion.div>}
-function ProjectCard({p,index,onOpen}){const [tilt,setTilt]=useState({x:0,y:0});const move=e=>{const r=e.currentTarget.getBoundingClientRect();setTilt({x:((e.clientX-r.left)/r.width-.5)*5,y:((e.clientY-r.top)/r.height-.5)*-5})};return <Reveal delay={index*.045}><motion.article className="project-card" style={{"--rx":tilt.y+"deg","--ry":tilt.x+"deg"}} onMouseMove={move} onMouseLeave={()=>setTilt({x:0,y:0})} whileHover={{y:-7}}><button className="project-hit" onClick={()=>onOpen(p)} aria-label={"View "+p.n}><div className="project-image"><img src={"/projects/"+p.id+".svg"} alt={p.n+" visual"} loading="lazy"/><span className="image-id">CASE / {p.id.toUpperCase()}</span><span className="image-arrow"><ArrowUpRight size={18}/></span><span className="image-status">{p.status}</span></div><div className="project-copy"><div className="project-meta"><span>{p.type}</span><span>{p.featured?"SELECTED":"ARCHIVE"}</span></div><h3>{p.n}</h3><p>{p.desc}</p><div className="project-tags">{p.stack.slice(0,4).map(s=><span key={s}>{s}</span>)}</div></div></button></motion.article></Reveal>}
-function App(){const [filter,setFilter]=useState("All work");const [showArchive,setShowArchive]=useState(false);const [active,setActive]=useState(null);const [menu,setMenu]=useState(false);const {scrollYProgress}=useScroll();const progress=useSpring(scrollYProgress,{stiffness:120,damping:28,restDelta:.001});const filtered=useMemo(()=>projects.filter(p=>filter==="All work"||p.group===filter),[filter]);const shown=showArchive||filter!=="All work"?filtered:filtered.filter(p=>p.featured);useEffect(()=>{document.body.classList.toggle("modal-open",!!active);const key=e=>{if(e.key==="Escape")setActive(null)};window.addEventListener("keydown",key);return()=>{document.body.classList.remove("modal-open");window.removeEventListener("keydown",key)}},[active]);const closeMenu=()=>setMenu(false);return <div className="site-shell"><motion.div className="scroll-progress" style={{scaleX:progress}}/><header className="header"><a href="#top" className="brand"><span className="brand-mark">KH<span>↗</span></span><span>KARIM HAMIDI<small>SOFTWARE ENGINEER</small></span></a><button className="mobile-menu" onClick={()=>setMenu(!menu)} aria-label="Toggle menu">{menu?<X/>:<Menu/>}</button><nav className={menu?"nav nav-open":"nav"}>{[["Work","work"],["Capabilities","capabilities"],["Experience","experience"],["About","about"]].map(([t,id])=><a key={id} href={"#"+id} onClick={closeMenu}>{t}</a>)}<a className="nav-cta" href="#contact" onClick={closeMenu}>Let's talk <ArrowUpRight size={14}/></a></nav></header>
-<main id="top">
-<section className="hero"><div className="hero-grid"/><div className="hero-noise"/><div className="container hero-inner"><div className="hero-copy"><div className="eyebrow"><i/> SOFTWARE ENGINEERING / FULL-STACK + COMPUTER VISION</div><div className="hero-number">PORTFOLIO / 2026 <b>—</b> 01</div><motion.h1 initial={{opacity:0,y:45}} animate={{opacity:1,y:0}} transition={{duration:.95,ease:[.22,1,.36,1]}}>I build for<br/><em>the real</em><br/>world<span>.</span></motion.h1><motion.p initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:.28}}>I'm Karim — a software developer working across full-stack products and applied computer vision. I connect thoughtful interfaces, dependable backend systems and intelligent visual workflows.</motion.p><motion.div className="hero-actions" initial={{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{delay:.45}}><a className="btn-primary" href="#work">Explore selected work <ArrowDownRight size={17}/></a><a className="btn-secondary" href="/Karim_Hamidi_ATS_Resume.pdf" download>Download CV <Download size={15}/></a></motion.div><div className="hero-facts"><span><MapPin size={13}/> HERAT, AFGHANISTAN</span><i/><span>4+ YEARS EXPERIENCE</span></div></div><motion.div className="hero-visual" initial={{opacity:0,x:40,scale:.96}} animate={{opacity:1,x:0,scale:1}} transition={{duration:1,delay:.25}}><div className="portrait-ring ring-a"/><div className="portrait-ring ring-b"/><div className="portrait"><img src={portrait} alt="Karim Hamidi"/><div className="portrait-overlay"/></div><div className="portrait-badge"><b>KH</b><small>BUILD / LEARN / REFINE</small></div><div className="portrait-note"><i/> SOFTWARE<br/><b>WITH PURPOSE</b></div><span className="portrait-index">KARIM HAMIDI / DEVELOPER</span></motion.div></div><div className="hero-bottom container"><span>SCROLL TO EXPLORE <ArrowDown size={13}/></span><i/><span>01 — 07</span></div></section>
-<section className="intro"><div className="container intro-inner"><Reveal><span className="section-index">01 / THE APPROACH</span></Reveal><Reveal delay={.08}><p>I care about the <em>whole system</em> — from the first interaction to the service behind it, and the real-world problem it solves.</p></Reveal><Reveal delay={.15} className="stats"><div><b>04<span>+</span></b><small>YEARS IN SOFTWARE</small></div><div><b>03</b><small>PROFESSIONAL ROLES</small></div><div><b>02</b><small>CORE DISCIPLINES</small></div></Reveal></div></section>
-<section className="work section-space" id="work"><div className="container"><div className="section-heading"><Reveal><span className="section-index">02 / SELECTED WORK</span><h2>Products, systems<br/>and <em>experiments.</em></h2></Reveal><Reveal className="section-note" delay={.1}><p>A portfolio of AI platforms, web applications and computer-vision systems. Every project has its own custom visual, designed to explain the actual work rather than imitate a product screenshot.</p><span>18 PROJECTS / 04 DOMAINS</span></Reveal></div><div className="filters">{groups.map(g=><button key={g} className={filter===g?"active":""} onClick={()=>{setFilter(g);setShowArchive(g==="Experiments")}}>{g}<small>{g==="All work"?projects.length:projects.filter(p=>p.group===g).length.toString().padStart(2,"0")}</small></button>)}</div><motion.div layout className="projects-grid"><AnimatePresence mode="popLayout">{shown.map((p,i)=><ProjectCard key={p.id} p={p} index={i} onOpen={setActive}/>)}</AnimatePresence></motion.div><div className="archive-bar"><span>{filter==="All work"?"MORE WORK / TECHNICAL EXPERIMENTS":shown.length+" PROJECTS / "+filter.toUpperCase()}</span>{filter==="All work"?<button onClick={()=>setShowArchive(!showArchive)}>{showArchive?"Show selected work":"Explore all projects"} {showArchive?<ArrowUp size={15}/>:<ArrowUpRight size={15}/>}</button>:<button onClick={()=>{setFilter("All work");setShowArchive(false)}}>Clear filter <X size={14}/></button>}</div></div></section>
-<section className="capabilities section-space" id="capabilities"><div className="container"><div className="section-heading"><Reveal><span className="section-index">03 / CAPABILITIES</span><h2>Engineering across<br/><em>the stack.</em></h2></Reveal><Reveal className="section-note"><p>My toolkit is shaped by the products I've built: user-facing applications, backend services and real-time visual systems.</p></Reveal></div><div className="skill-grid">{skills.map((s,i)=>{const Icon=s.icon;return <Reveal className="skill-card" key={s.name} delay={i*.06}><div className="skill-top"><span>0{i+1}</span><Icon/></div><h3>{s.name}</h3><div className="skill-tags">{s.items.map(x=><span key={x}>{x}</span>)}</div></Reveal>})}</div></div></section>
-<section className="manifesto"><div className="container manifesto-inner"><Reveal><span className="section-index">04 / ENGINEERING PHILOSOPHY</span><h2>Make it clear.<br/>Make it work.<br/><em>Make it last.</em></h2></Reveal><Reveal className="manifesto-note" delay={.1}><Sparkles/><p>Good engineering is not a list of technologies. It is understanding constraints, choosing the right tools and building something people can rely on.</p><span>THINK DEEPLY / BUILD CAREFULLY</span></Reveal></div></section>
-<section className="experience section-space" id="experience"><div className="container"><div className="section-heading"><Reveal><span className="section-index">05 / EXPERIENCE</span><h2>Where I've<br/><em>contributed.</em></h2></Reveal><Reveal className="section-note"><p>Professional roles across computer vision, web development and full-stack application engineering.</p></Reveal></div><div className="timeline">{experience.map((e,i)=><Reveal key={e.company}><article className="timeline-row"><div className="timeline-date"><span>0{i+1}</span><b>{e.period}</b></div><div className="timeline-role"><h3>{e.role}</h3><span>{e.company} <i>·</i> {e.place}</span></div><ul>{e.points.map(p=><li key={p}>{p}</li>)}</ul><ArrowUpRight className="timeline-arrow"/></article></Reveal>)}</div><div className="education"><div><span className="section-index">EDUCATION</span><h3>BSc Computer Science</h3><p>Ghalib University · Herat, Afghanistan · 2020–2024</p></div><div><span className="section-index">CERTIFICATION</span><h3>MERN Stack Development</h3><p>Wassa Company · 2023</p></div></div></div></section>
-<section className="about section-space" id="about"><div className="container about-inner"><Reveal><span className="section-index">06 / A LITTLE ABOUT ME</span><h2>Curious by nature.<br/><em>Practical by design.</em></h2><p>I enjoy working where product thinking meets engineering detail — shaping the experience, connecting the data and exploring how computer vision can make software more aware of the world around it.</p></Reveal><Reveal className="about-side"><div><span>LANGUAGES</span><p><b>Persian</b><small>Native</small></p><p><b>English</b><small>Professional working proficiency</small></p><p><b>Arabic</b><small>Intermediate</small></p></div><div><span>EDUCATION</span><h3>Computer Science<br/>Ghalib University</h3></div></Reveal></div></section>
-<section className="contact" id="contact"><div className="contact-glow"/><div className="container contact-inner"><Reveal><span className="section-index">07 / GET IN TOUCH</span><h2>Have a good<br/><em>problem?</em></h2><p>I'd like to hear about it. Reach out for project discussions, engineering opportunities or a thoughtful conversation.</p></Reveal><Reveal className="contact-card" delay={.12}><span>CONTACT DETAILS</span><a href={"mailto:"+email}>{email}<ArrowUpRight/></a><a href={"tel:"+phone.replaceAll(" ","")}>{phone}<ArrowUpRight/></a><div className="socials"><a href={github} target="_blank" rel="noreferrer"><Github/> GITHUB</a><a href={linkedin} target="_blank" rel="noreferrer"><Linkedin/> LINKEDIN</a></div><a className="cv-link" href="/Karim_Hamidi_ATS_Resume.pdf" download>DOWNLOAD CV <Download/></a></Reveal></div></section>
-</main><footer className="footer"><div className="container footer-inner"><a className="brand" href="#top"><span className="brand-mark">KH<span>↗</span></span><span>KARIM HAMIDI<small>SOFTWARE ENGINEER</small></span></a><span>DESIGNED WITH INTENTION / BUILT WITH CURIOSITY</span><span>© {new Date().getFullYear()} KARIM HAMIDI</span><a href="#top">BACK TO TOP <ArrowUp size={13}/></a></div></footer>
-<AnimatePresence>{active&&<motion.div className="modal-layer" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} onClick={()=>setActive(null)}><motion.div className="project-modal" initial={{opacity:0,y:35,scale:.97}} animate={{opacity:1,y:0,scale:1}} exit={{opacity:0,y:20}} onClick={e=>e.stopPropagation()} role="dialog" aria-modal="true" aria-label={active.n}><button className="modal-close" onClick={()=>setActive(null)} aria-label="Close"><X/></button><div className="modal-art"><img src={"/projects/"+active.id+".svg"} alt=""/></div><div className="modal-content"><span className="section-index">{active.type} / {active.status}</span><h2>{active.n}</h2><p className="modal-lead">{active.desc}</p><p className="modal-detail">{active.detail}</p><div className="modal-tags">{active.stack.map(s=><span key={s}>{s}</span>)}</div><a className="repo-link" href={active.repo} target="_blank" rel="noreferrer"><Github/> View repository <ArrowUpRight/></a></div></motion.div></motion.div>}</AnimatePresence></div>}
+
+const capabilities = [
+  { number: "01", icon: Code2, title: "Product interfaces", copy: "Responsive web experiences with clear information architecture, reusable components and thoughtful interaction.", tools: ["React", "Next.js", "TypeScript", "JavaScript", "Redux", "Tailwind CSS"] },
+  { number: "02", icon: Database, title: "Backend systems", copy: "APIs, authentication, data models and integrations designed around real application workflows.", tools: ["Node.js", "Express", "FastAPI", "REST APIs", "WebSockets", "JWT", "MongoDB", "MySQL"] },
+  { number: "03", icon: ScanFace, title: "Computer vision", copy: "Applied vision systems for recognition, detection, tracking, liveness and video analysis.", tools: ["Python", "OpenCV", "YOLOv8", "InsightFace", "MediaPipe", "PyTorch", "scikit-learn", "CNNs", "KNN"] },
+  { number: "04", icon: Terminal, title: "Engineering workflow", copy: "Tools and practices that support reliable delivery, debugging and collaboration.", tools: ["Git", "GitHub", "Docker", "Linux", "Postman", "Vercel", "Agile / Scrum"] }
+];
+
+const nav = [["Work", "work"], ["Expertise", "expertise"], ["Journey", "journey"], ["About", "about"]];
+
+function Reveal({ children, className = "", delay = 0, y = 28 }) {
+  const ref = useRef(null);
+  const visible = useInView(ref, { once: true, margin: "-70px" });
+  return <motion.div ref={ref} className={className} initial={{ opacity: 0, y }} animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y }} transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}>{children}</motion.div>;
+}
+
+function SectionIntro({ index, eyebrow, title, note }) {
+  return <div className="section-intro">
+    <div className="section-intro-meta"><span>{index}</span><span>{eyebrow}</span></div>
+    <div className="section-intro-main"><h2>{title}</h2>{note && <p>{note}</p>}</div>
+  </div>;
+}
+
+function ProjectCard({ project, index, onOpen }) {
+  return <Reveal className={"project-card project-" + project.tone} delay={index * 0.07}>
+    <button className="project-card-button" onClick={() => onOpen(project)} aria-label={"View details for " + project.title}>
+      <div className="project-art">
+        <span className="project-index">{project.id} / 07</span>
+        {project.image ? <img src={project.image} alt={project.title + " preview"} loading="lazy" /> : <div className="project-abstract"><div className="abstract-orbit orbit-one"/><div className="abstract-orbit orbit-two"/><BrainCircuit size={54}/><span>APPLIED AI / SYSTEMS</span></div>}
+        <span className="project-open"><ArrowUpRight size={20}/></span>
+      </div>
+      <div className="project-card-copy">
+        <span className="project-category">{project.category}</span>
+        <h3>{project.title}</h3>
+        <p>{project.intro}</p>
+        <div className="project-card-bottom"><span>{project.stack.slice(0, 3).join(" · ")}</span><span>EXPLORE <ArrowUpRight size={13}/></span></div>
+      </div>
+    </button>
+  </Reveal>;
+}
+
+function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeProject, setActiveProject] = useState(null);
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+  useEffect(() => {
+    document.body.classList.toggle("modal-open", Boolean(activeProject));
+    const onKey = (event) => { if (event.key === "Escape") setActiveProject(null); };
+    window.addEventListener("keydown", onKey);
+    return () => { document.body.classList.remove("modal-open"); window.removeEventListener("keydown", onKey); };
+  }, [activeProject]);
+
+  const closeMenu = () => setMenuOpen(false);
+  const shownProjects = showAllProjects ? projects : projects.slice(0, 3);
+
+  return <div className="portfolio">
+    <motion.div className="scroll-progress" style={{ scaleX: progress }} />
+    <header className="header">
+      <a href="#top" className="brand" onClick={closeMenu}><span className="brand-symbol">K<span>.</span></span><span className="brand-copy">KARIM HAMIDI<small>SOFTWARE ENGINEER</small></span></a>
+      <button className="mobile-menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen ? <X/> : <Menu/>}</button>
+      <nav className={menuOpen ? "navigation navigation-open" : "navigation"}>{nav.map(([label, id]) => <a key={id} href={"#" + id} onClick={closeMenu}>{label}</a>)}<a className="nav-cta" href="#contact" onClick={closeMenu}>Let's talk <ArrowUpRight size={15}/></a></nav>
+    </header>
+
+    <main id="top">
+      <section className="hero">
+        <div className="hero-grid-bg"/>
+        <div className="hero-inner">
+          <div className="hero-left">
+            <motion.div className="hero-label" initial={{ opacity: 0, x: -18 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}><span className="live-dot"/> OPEN TO MEANINGFUL ENGINEERING WORK</motion.div>
+            <motion.p className="hero-overline" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }}>FULL-STACK DEVELOPMENT <span>+</span> COMPUTER VISION</motion.p>
+            <motion.h1 initial={{ opacity: 0, y: 35 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}>I turn complex<br/>ideas into <em>useful</em><br/><span className="hero-outline">software.</span></motion.h1>
+            <motion.p className="hero-summary" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.7 }}>I'm Karim, a developer working across modern web applications and applied computer vision. I build products from the interface and API to systems that interpret real-world visual data.</motion.p>
+            <motion.div className="hero-actions" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
+              <a href="#work" className="btn btn-dark">Explore selected work <ArrowDownRight size={17}/></a>
+              <a href="/Karim_Hamidi_ATS_Resume.pdf" download className="btn btn-line">Download résumé <Download size={16}/></a>
+            </motion.div>
+            <motion.div className="hero-footnote" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}><MapPin size={14}/> HERAT, AFGHANISTAN <span className="footnote-separator"/> 4+ YEARS BUILDING SOFTWARE</motion.div>
+          </div>
+          <motion.div className="hero-right" initial={{ opacity: 0, scale: 0.92, y: 25 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}>
+            <div className="hero-image-wrap"><img src={profileImage} alt="Karim Hamidi" /><div className="image-grain"/></div>
+            <div className="hero-photo-caption"><span>01 — THE ENGINEER</span><span>CURIOUS BY DEFAULT</span></div>
+            <div className="hero-orbit orbit-a"/><div className="hero-orbit orbit-b"/>
+            <div className="hero-floating-card"><Sparkles size={17}/><span>BUILDING AT THE<br/><strong>INTERSECTION OF IDEAS</strong></span></div>
+            <div className="hero-vertical-text">KARIM HAMIDI / PORTFOLIO 2026</div>
+          </motion.div>
+        </div>
+        <a className="hero-scroll" href="#intro"><span>SCROLL TO DISCOVER</span><span className="scroll-line"/></a>
+        <div className="hero-index">01 <span>—</span> 05</div>
+      </section>
+
+      <section className="intro-band" id="intro">
+        <div className="container intro-band-inner">
+          <Reveal><span className="micro-label">A PRACTICAL MINDSET</span></Reveal>
+          <Reveal delay={0.1}><p>I like solving the part that makes a product <em>work</em> — not just the part that makes it look finished.</p></Reveal>
+          <Reveal delay={0.2}><div className="intro-stats"><div><strong>4<span>+</span></strong><small>YEARS EXPERIENCE</small></div><div><strong>3</strong><small>PROFESSIONAL ROLES</small></div><div><strong>7</strong><small>SELECTED PROJECTS</small></div></div></Reveal>
+        </div>
+      </section>
+
+      <section className="work-section section-pad" id="work">
+        <div className="container">
+          <SectionIntro index="01" eyebrow="SELECTED WORK" title={<>Built to solve<br/><em>real problems.</em></>} note="A closer look at web products and computer vision systems I've worked on. Each project starts with a practical problem and a focused technical approach."/>
+          <div className="projects-grid">{shownProjects.map((project, index) => <ProjectCard key={project.id} project={project} index={index} onOpen={setActiveProject}/>)}</div>
+          <div className="projects-footer"><span>SHOWING {shownProjects.length} OF 07 PROJECTS</span><button onClick={() => setShowAllProjects(!showAllProjects)}>{showAllProjects ? "Show featured projects" : "View all projects"} <ArrowUpRight size={16}/></button></div>
+        </div>
+      </section>
+
+      <section className="expertise-section section-pad" id="expertise">
+        <div className="container">
+          <SectionIntro index="02" eyebrow="HOW I CONTRIBUTE" title={<>Engineering across<br/><em>the stack.</em></>} note="My work spans user-facing applications, backend services and computer vision — with an emphasis on connecting the pieces into useful products."/>
+          <div className="capability-list">{capabilities.map((item, i) => { const Icon = item.icon; return <Reveal key={item.number} delay={i * 0.06}><article className="capability-row"><div className="capability-number">{item.number}</div><div className="capability-title"><Icon size={24}/><h3>{item.title}</h3></div><p className="capability-copy">{item.copy}</p><div className="capability-tools">{item.tools.map(tool => <span key={tool}>{tool}</span>)}</div><ArrowUpRight className="capability-arrow" size={20}/></article></Reveal>; })}</div>
+        </div>
+      </section>
+
+      <section className="statement-section">
+        <div className="statement-bg-word">THINK</div>
+        <div className="container statement-inner"><Reveal><span className="micro-label">THE WAY I APPROACH ENGINEERING</span><h2>Good software is<br/>more than <em>code.</em></h2><p>It is a clear understanding of the problem, a thoughtful technical decision, and a reliable experience for the person using it.</p></Reveal><Reveal delay={0.15}><div className="statement-aside"><span>01 / UNDERSTAND</span><span>02 / DESIGN</span><span>03 / BUILD</span><span>04 / REFINE</span></div></Reveal></div>
+      </section>
+
+      <section className="journey-section section-pad" id="journey">
+        <div className="container">
+          <SectionIntro index="03" eyebrow="EXPERIENCE & EDUCATION" title={<>The work behind<br/><em>the work.</em></>} note="Professional experience across computer vision and full-stack web development."/>
+          <div className="journey-layout"><div className="experience-list">{experience.map((job, i) => <Reveal key={job.company} delay={i * 0.08}><article className="experience-item"><div className="experience-index">0{i + 1}</div><div className="experience-main"><div className="experience-top"><span>{job.period}</span><span>{job.location}</span></div><h3>{job.role}</h3><h4>{job.company}</h4><ul>{job.bullets.map(point => <li key={point}>{point}</li>)}</ul></div></article></Reveal>)}</div>
+            <Reveal className="education-panel" delay={0.2}><span className="micro-label">EDUCATION</span><div className="education-emblem"><Terminal size={27}/></div><span className="education-years">2020 — 2024</span><h3>Bachelor of Science</h3><p>Computer Science</p><div className="education-divider"/><strong>Ghalib University</strong><span>Herat, Afghanistan</span><div className="certification"><Check size={15}/><span><b>MERN Stack Development</b><small>Wassa Company · 2023</small></span></div></Reveal>
+          </div>
+        </div>
+      </section>
+
+      <section className="about-section section-pad" id="about">
+        <div className="container about-layout"><div><SectionIntro index="04" eyebrow="A LITTLE ABOUT ME" title={<>Curiosity is part<br/>of the <em>process.</em></>} note="I enjoy moving between different layers of a product — understanding the user need, shaping the interface, connecting the backend and exploring where computer vision can make a difference."/></div>
+          <Reveal className="about-details"><div className="language-block"><span className="micro-label">LANGUAGES</span><div><b>Persian</b><span>Native</span></div><div><b>English</b><span>Professional working proficiency</span></div><div><b>Arabic</b><span>Intermediate</span></div></div><div className="principles-block"><span className="micro-label">WHAT MATTERS TO ME</span><p>Clear communication.<br/>Useful details.<br/>Software that holds up.</p></div></Reveal>
+        </div>
+      </section>
+
+      <section className="contact-section" id="contact">
+        <div className="contact-grid-bg"/>
+        <div className="container contact-inner"><Reveal><span className="micro-label">HAVE SOMETHING INTERESTING IN MIND?</span><h2>Let's build<br/><em>what's next.</em></h2><p>For project enquiries, engineering conversations or professional opportunities, I'd be glad to hear from you.</p></Reveal>
+          <Reveal delay={0.15} className="contact-card"><span className="contact-card-label">START A CONVERSATION</span><a className="contact-email" href={"mailto:" + email}>{email}<ArrowUpRight size={20}/></a><div className="contact-links"><a href={linkedin} target="_blank" rel="noreferrer"><Linkedin size={17}/> LINKEDIN</a><a href={github} target="_blank" rel="noreferrer"><Github size={17}/> GITHUB</a></div><a className="contact-resume" href="/Karim_Hamidi_ATS_Resume.pdf" download>DOWNLOAD RÉSUMÉ <Download size={15}/></a></Reveal>
+        </div>
+      </section>
+    </main>
+
+    <footer className="footer"><div className="container footer-inner"><a href="#top" className="brand"><span className="brand-symbol">K<span>.</span></span><span className="brand-copy">KARIM HAMIDI<small>SOFTWARE ENGINEER</small></span></a><span className="footer-note">DESIGNED WITH INTENTION. BUILT WITH CODE.</span><span className="footer-copy">© {new Date().getFullYear()} KARIM HAMIDI</span></div></footer>
+
+    <AnimatePresence>{activeProject && <motion.div className="project-modal-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setActiveProject(null)}><motion.div className="project-modal" initial={{ opacity: 0, y: 35, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 20, scale: 0.98 }} transition={{ duration: 0.35 }} onClick={event => event.stopPropagation()} role="dialog" aria-modal="true" aria-label={activeProject.title}><button className="modal-close" onClick={() => setActiveProject(null)} aria-label="Close project details"><X/></button><span className="project-category">{activeProject.category}</span><h2>{activeProject.title}</h2><p className="modal-intro">{activeProject.intro}</p><p className="modal-detail">{activeProject.detail}</p><div className="modal-outcome"><span>FOCUS AREAS</span><p>{activeProject.outcome}</p></div><div className="modal-stack">{activeProject.stack.map(item => <span key={item}>{item}</span>)}</div><a href={github} target="_blank" rel="noreferrer" className="modal-github">Explore GitHub profile <ArrowUpRight size={16}/></a></motion.div></motion.div>}</AnimatePresence>
+  </div>;
+}
+
 export default App;
