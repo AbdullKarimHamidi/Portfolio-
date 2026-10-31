@@ -5,6 +5,7 @@ import {
   Menu, Monitor, Sparkles, Terminal, X
 } from "lucide-react";
 import profileImage from "./assets/h2.png";
+import "./portfolio.css";
 import basketballImage from "./assets/bask.png";
 import intrusionImage from "./assets/intrusion.png";
 import lmsImage from "./assets/lms.png";
